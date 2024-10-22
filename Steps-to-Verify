@@ -66,13 +66,17 @@ notAfter=Apr 22 08:27:20 2025 GMT
 NAME                             READY   STATUS    RESTARTS       AGE
 router-default-b59c7b9cf-rsjcd   1/1     Running   3 (121m ago)   12h
 router-default-b59c7b9cf-wfmxs   1/1     Running   3 (121m ago)   12h
+
 [student@workstation cert-test]$ oc delete -f classroom-tls-Ingress.yaml 
 secret "classroom-tls" deleted
+
 [student@workstation cert-test]$ oc create -f classroom-tls-Ingress.yaml 
 secret/classroom-tls created
+
 [student@workstation cert-test]$ oc exec -it router-default-b59c7b9cf-wfmxs -- openssl x509 -in /etc/pki/tls/private/tls.crt -noout -issuer -enddate
 issuer=CN = openshift-network-node-identity_network-node-identity-ca@1709669001
 notAfter=Apr 22 08:27:20 2025 GMT
+
 [student@workstation cert-test]$ oc exec -it router-default-b59c7b9cf-wfmxs -- openssl x509 -in /etc/pki/tls/private/tls.crt -noout -issuer -enddate
 issuer=O = EXAMPLE.COM, CN = Red Hat Training Certificate Authority
 notAfter=Jan  7 12:33:04 2029 GMT
